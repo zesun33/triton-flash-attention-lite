@@ -1,10 +1,10 @@
 # FlashAttention Lite (OpenAI Triton)
 
-A learning-focused project to understand modern GPU kernel development using Triton compiler.
+Modern GPU kernel development with the Triton compiler.
 
-## 🎯 Learning Goals
+## Goals
 
-By completing this project, you will understand:
+This repo covers:
 - Triton compiler and Python-like GPU programming
 - FlashAttention algorithm (tiling Q, K, V in SRAM)
 - Block-level memory management
