@@ -2,57 +2,59 @@
 
 Modern GPU kernel development with the Triton compiler.
 
+> **Status:** roadmap stub. Notes and source files listed below are **planned** and not in-tree yet.
+
 ## Goals
 
-This repo covers:
+This repo will cover:
 - Triton compiler and Python-like GPU programming
 - FlashAttention algorithm (tiling Q, K, V in SRAM)
 - Block-level memory management
 - Online softmax computation
 - Memory-efficient attention for long sequences
 
-## ⚠️ Prerequisites
+## Prerequisites
 
 - **Triton**: `pip install triton`
 - **NVIDIA GPU**: Compute Capability 7.0+ (Volta or newer)
 - **Python 3.8+**
 
-## 📚 Learning Roadmap
+## Learning Roadmap (Planned)
 
 ### Phase 1: Theory (Notes)
 
-| # | Note | Topic | Status |
+| # | File | Topic | Status |
 |---|------|-------|--------|
-| 0 | [00_triton_basics.md](notes/00_triton_basics.md) | Triton vs CUDA, blocks, programming model | ⬜ |
-| 1 | [01_flash_attention_algorithm.md](notes/01_flash_attention_algorithm.md) | FlashAttention tiling and online softmax | ⬜ |
-| 2 | [02_memory_efficiency.md](notes/02_memory_efficiency.md) | HBM reduction, IO complexity | ⬜ |
+| 0 | `notes/00_triton_basics.md` | Triton vs CUDA, blocks, programming model | planned |
+| 1 | `notes/01_flash_attention_algorithm.md` | FlashAttention tiling and online softmax | planned |
+| 2 | `notes/02_memory_efficiency.md` | HBM reduction, IO complexity | planned |
 
 ### Phase 2: Implementation
 
-| # | File | Concept | Prereq Notes | Status |
-|---|------|---------|--------------|--------|
-| 1 | [01_pytorch_attention.py](src/01_pytorch_attention.py) | Baseline PyTorch attention | - | ⬜ |
-| 2 | [02_triton_matmul.py](src/02_triton_matmul.py) | Simple Triton matmul (warmup) | 0 | ⬜ |
-| 3 | [03_triton_softmax.py](src/03_triton_softmax.py) | Triton fused softmax | 0 | ⬜ |
-| 4 | [04_flash_attention.py](src/04_flash_attention.py) | Full FlashAttention kernel | 0, 1 | ⬜ |
+| # | File | Concept | Status |
+|---|------|---------|--------|
+| 1 | `src/01_pytorch_attention.py` | Baseline PyTorch attention | planned |
+| 2 | `src/02_triton_matmul.py` | Simple Triton matmul (warmup) | planned |
+| 3 | `src/03_triton_softmax.py` | Triton fused softmax | planned |
+| 4 | `src/04_flash_attention.py` | Full FlashAttention kernel | planned |
 
 ### Phase 3: Benchmarking
 
 | # | File | Purpose | Status |
 |---|------|---------|--------|
-| 1 | [benchmark.py](benchmarks/benchmark.py) | Compare latency and memory | ⬜ |
+| 1 | `benchmarks/benchmark.py` | Compare latency and memory | planned |
 
-## 📁 Directory Structure
+## Planned Directory Structure
 
 ```
 triton-flash-attention-lite/
 ├── README.md
 ├── requirements.txt
 ├── src/
-│   ├── 01_pytorch_attention.py   # Baseline
-│   ├── 02_triton_matmul.py       # Warmup: simple matmul
-│   ├── 03_triton_softmax.py      # Fused softmax
-│   └── 04_flash_attention.py     # Full FlashAttention
+│   ├── 01_pytorch_attention.py
+│   ├── 02_triton_matmul.py
+│   ├── 03_triton_softmax.py
+│   └── 04_flash_attention.py
 ├── notes/
 │   ├── 00_triton_basics.md
 │   ├── 01_flash_attention_algorithm.md
@@ -61,36 +63,16 @@ triton-flash-attention-lite/
     └── benchmark.py
 ```
 
-## 🔧 Setup & Run
-
-```bash
-# Install Triton
-pip install triton
-
-# Run baseline
-python src/01_pytorch_attention.py
-
-# Run FlashAttention
-python src/04_flash_attention.py
-
-# Benchmark
-python benchmarks/benchmark.py --seq_len 4096
-```
-
-## 📊 Expected Results
+## Expected Results (Target)
 
 For sequence length N=4096, head_dim=64:
 
 | Implementation | Time | Memory | Speedup |
 |----------------|------|--------|---------|
-| PyTorch Standard | ~50ms | O(N²) | 1x |
-| Triton FlashAttention | ~10ms | O(N) | 5x |
+| PyTorch Standard | ~50ms | O(N²) | 1× |
+| Triton FlashAttention | ~10ms | O(N) | 5× |
 
-## 🔗 Relevance
-
-**Industry Skills**: Triton is used by Meta, OpenAI for production kernels. Understanding compiler-based GPU programming is a "unicorn skill."
-
-## 📖 References
+## References
 
 - [Triton Documentation](https://triton-lang.org/)
 - [FlashAttention Paper](https://arxiv.org/abs/2205.14135)
