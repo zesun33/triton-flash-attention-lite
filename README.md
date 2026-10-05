@@ -1,5 +1,26 @@
 # FlashAttention Lite (OpenAI Triton)
 
+<!-- BEGIN GENERATED PROJECT GUIDE -->
+
+## Purpose and first steps
+
+Plan a future tiled-attention implementation and correctness/performance study.
+
+**Who it is for:** Learners planning to study tiled attention and online softmax.
+
+**First task:** Read the roadmap and define a reference attention calculation before implementing a Triton kernel.
+
+**What to expect:** A sequence of planned baseline, softmax, tiling, and correctness/performance tasks.
+
+**Current scope:** Planning documents only; no attention kernel or measured benchmark is present.
+
+**Start here:** [Planned attention study](README.md#learning-roadmap-planned).
+
+**Related projects:** [cuda-gemm-optimization](https://github.com/zesun33/cuda-gemm-optimization), [resnet-tensorrt-bench](https://github.com/zesun33/resnet-tensorrt-bench).
+
+[Choose another project](https://github.com/zesun33/personal-projects/blob/main/GETTING_STARTED.md).
+<!-- END GENERATED PROJECT GUIDE -->
+
 Modern GPU kernel development with the Triton compiler.
 
 > **Status:** roadmap stub. Notes and source files listed below are **planned** and not in-tree yet.
@@ -63,14 +84,9 @@ triton-flash-attention-lite/
     └── benchmark.py
 ```
 
-## Expected Results (Target)
+## Future measurement plan
 
-For sequence length N=4096, head_dim=64:
-
-| Implementation | Time | Memory | Speedup |
-|----------------|------|--------|---------|
-| PyTorch Standard | ~50ms | O(N²) | 1× |
-| Triton FlashAttention | ~10ms | O(N) | 5× |
+No latency, speedup, memory, or accuracy results have been measured in this repository. Implement a reference baseline and correctness/accuracy checks first, then record hardware, inputs, versions, samples, and the tradeoffs between implementations.
 
 ## References
 
